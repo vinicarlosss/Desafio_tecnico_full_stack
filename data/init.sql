@@ -5,35 +5,35 @@ CREATE DATABASE IF NOT EXISTS app_db;
 USE app_db;
 
 -- Criação da tabela Motorista
-CREATE TABLE IF NOT EXISTS Motorista (
+CREATE TABLE IF NOT EXISTS Driver (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    descricao TEXT,
-    carro VARCHAR(255),
-    avaliacao VARCHAR(255),
-    taxa VARCHAR(255),
-    km_minimo INT
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    car VARCHAR(255),
+    rating VARCHAR(255),
+    tax VARCHAR(255),
+    km_minimum INT
 );
 
-CREATE TABLE IF NOT EXISTS Usuario (
+CREATE TABLE IF NOT EXISTS Customer (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL
+    name VARCHAR(255) NOT NULL
 );
 
 -- Criação da tabela Corrida
-CREATE TABLE IF NOT EXISTS Corrida (
+CREATE TABLE IF NOT EXISTS Ride (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    distancia FLOAT NOT NULL,
-    tempo_percurso INT NOT NULL,
-    valor_corrida DECIMAL(10, 2) NOT NULL,
-    avaliacao FLOAT DEFAULT NULL,
-    id_motorista BIGINT,
-    id_passageiro BIGINT,
-    carro VARCHAR(255),
-    origem_latitude FLOAT,
-    origem_longitude FLOAT,
-    destino_latitude FLOAT,
-    destino_longitude FLOAT,
-    FOREIGN KEY (id_motorista) REFERENCES Motorista(id),
-    FOREIGN KEY (id_passageiro) REFERENCES Usuario(id)
+    distance FLOAT NOT NULL,
+    duration INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    rating FLOAT DEFAULT NULL,
+    id_driver BIGINT,
+    id_customer BIGINT,
+    car VARCHAR(255),
+    origin_latitude FLOAT,
+    origin_longitude FLOAT,
+    destination_latitude FLOAT,
+    destination_longitude FLOAT,
+    FOREIGN KEY (id_driver) REFERENCES Driver(id),
+    FOREIGN KEY (id_customer) REFERENCES Customer(id)
 );
