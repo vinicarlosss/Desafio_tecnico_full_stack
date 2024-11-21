@@ -1,4 +1,4 @@
-<center># 🚗 Desafio Técnico Full Stack </center>
+<center># Desafio Técnico Full Stack </center>
 
 Bem-vindo ao repositório do **Desafio Técnico Full Stack**! 🚀
 
