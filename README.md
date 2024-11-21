@@ -1,4 +1,4 @@
-# 🚗 Desafio Técnico Full Stack
+<center># 🚗 Desafio Técnico Full Stack </center>
 
 Bem-vindo ao repositório do **Desafio Técnico Full Stack**! 🚀
 
@@ -23,8 +23,8 @@ Para rodar o ambiente de desenvolvimento completo, com back-end e front-end, sig
 Primeiro, clone o repositório e acesse a pasta do projeto no seu terminal:
 
 ```bash
-git clone https://github.com/seu-usuario/estimate-ride-app.git
-cd estimate-ride-app
+git clone https://github.com/vinicarlosss/Desafio_tecnico_full_stack.git
+cd Desafio_tecnico_full_stack
 ```
 ### 2. Configure as váriaveis de ambiente
 
