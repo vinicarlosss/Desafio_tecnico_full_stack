@@ -8,20 +8,21 @@ export class RideController {
     this.estimateRideService = new EstimateRideService();
   }
 
-  async estimateRide(req: Request, res: Response): Promise<Response>{
+  async estimateRide(req: Request, res: Response): Promise<void>{
     
     const { customer_id, origin, destination } = req.body;
     try {
-      const result = await this.estimateRideService.estimateRide({ customer_id, origin, destination });
-      return res.status(200).json(result);
+      
+       const result = await this.estimateRideService.estimateRide({ customer_id, origin, destination });
+       res.status(200).json(result);
     } catch (error:unknown) {
       if(error instanceof Error){
-        return res.status(400).json({
+          res.status(400).json({
           error_code: 'INVALID_DATA',
           error_description: error.message
         });
       }else{
-        return res.status(500).json({
+          res.status(500).json({
           error_code: 'INTERNAL_ERROR',
           error_description: 'Um erro inesperado ocorreu'
         })

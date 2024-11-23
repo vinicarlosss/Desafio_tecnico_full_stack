@@ -12,5 +12,30 @@ services:
     volumes:
       #- db_data:/var/lib/mysql
       - ./data/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app_network
 #volumes:
   #db_data:
+  api:
+    build:
+      context: ./api # Caminho onde está o código da sua API
+    container_name: api
+    environment:
+      MYSQL_HOST: db # Nome do serviço do banco de dados
+      MYSQL_PORT: 3306
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_password
+      MYSQL_DATABASE: app_db
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY} # Passando a chave de API como variável de ambiente
+    ports:
+      - "8080:8080" # Mapeia a porta 8080 do container para a 8080 do host
+    depends_on:
+      - db # Garante que o banco de dados suba antes da API
+    networks:
+      - app_network
+    command: npm start # Caso você use um comando para iniciar a API (ajuste conforme necessário)
+
+# Definindo redes para comunicação entre os containers
+networks:
+  app_network:
+    driver: bridge
