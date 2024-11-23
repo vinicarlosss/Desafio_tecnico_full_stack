@@ -1,4 +1,5 @@
 import mysql from "mysql2/promise";
+import { Driver } from "../../Models/Driver/Driver";
 
 const dbConfig = {
     host: process.env.MYSQL_HOST, 
@@ -9,13 +10,11 @@ const dbConfig = {
 
 class RideRepository  {
 
-    private connection;
+    private connection: mysql.Pool;
 
     constructor(){
 
         this.connection = mysql.createPool(dbConfig);
     };
-
 }
-
 export default RideRepository;

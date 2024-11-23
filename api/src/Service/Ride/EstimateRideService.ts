@@ -1,13 +1,16 @@
 import axios from "axios";
 import RideRepository from "../../Repository/Ride/RideRepository";
 import { EstimateRideResponse } from "../../Controller/Ride/response/EstimatedRideResponse";
+import DriverRepository from "../../Repository/Driver/DriverRepository";
 
 export class EstimateRideService {
   private rideRepository: RideRepository;
+  private driveRepository: DriverRepository;
   private apiKey: string;
 
   constructor() {
     this.rideRepository = new RideRepository();
+    this.driveRepository = new DriverRepository();
     this.apiKey = process.env.GOOGLE_API_KEY as string;
   }
 
@@ -64,6 +67,13 @@ export class EstimateRideService {
     }
   }
 
+  public parseRating(ratingText: string): { rating: number; comment: string } {
+    const [ratingPart, ...commentParts] = ratingText.split(" - ");
+    const rating = parseFloat(ratingPart.split("/")[0]); // Pegando o número antes do "/"
+    const comment = commentParts.join(" - "); // Reunindo o restante do texto
+    return { rating, comment };
+  }
+
   // Função para calcular a rota entre a origem e o destino
   public async calculateRoute(requestBody: {
     customer_id: string;
@@ -117,31 +127,22 @@ export class EstimateRideService {
 
         const distance = route.distanceMeters / 1000; // Convertendo metros para quilômetros
         const duration = this.formatDuration(route.duration);
-        const options = [
-          {
-            id: 1,
-            name: "Homer Simpson",
-            description: "Motorista camarada, relaxe e aproveite o passeio.",
-            vehicle: "Plymouth Valiant 1973",
+        const eligibleDrivers = await this.driveRepository.getEligibleDrivers(distance);
+        const options = eligibleDrivers.map(driver => {
+          const parsedRating = this.parseRating(driver.rating);
+          const formattedTax = driver.tax.replace(',', '.').replace(/[^\d.]/g, '');
+          return {
+            id: driver.id,
+            name: driver.name,
+            description: driver.description,
+            vehicle: driver.car,
             review: {
-              rating: 2.5,
-              comment:
-                "Motorista simpático, mas errou o caminho algumas vezes.",
+              rating: parsedRating.rating,
+              comment: parsedRating.comment,
             },
-            value: 5.0,
-          },
-          {
-            id: 2,
-            name: "Dominic Toretto",
-            description: "Motorista rápido e seguro.",
-            vehicle: "Dodge Charger R/T 1970",
-            review: {
-              rating: 4.5,
-              comment: "Carro rápido, o motorista é ótimo!",
-            },
-            value: 10.0,
-          },
-        ];
+            value: parseFloat(formattedTax) * distance,
+          };
+        });
         const result: EstimateRideResponse = {
           origin: {
             latitude: originCoords.latitude,
