@@ -1,10 +1,10 @@
 import mysql from "mysql2/promise";
 
 const dbConfig = {
-    host: "127.0.0.1", 
-    user: "app_user",
-    password: "app_password", 
-    database: "app_db",
+    host: process.env.MYSQL_HOST, 
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD, 
+    database: process.env.MYSQL_DATABASE,
 };
 
 class RideRepository  {

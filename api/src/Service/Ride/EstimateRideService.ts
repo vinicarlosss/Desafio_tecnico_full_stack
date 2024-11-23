@@ -3,12 +3,10 @@ import RideRepository from "../../Repository/Ride/RideRepository";
 import { EstimateRideResponse } from "../../Controller/Ride/response/EstimatedRideResponse";
 
 export class EstimateRideService {
-
   private rideRepository: RideRepository;
   private apiKey: string;
 
   constructor() {
-
     this.rideRepository = new RideRepository();
     this.apiKey = process.env.GOOGLE_API_KEY as string;
   }
@@ -31,7 +29,9 @@ export class EstimateRideService {
   private async getCoordinatesFromAddress(
     address: string
   ): Promise<{ latitude: number; longitude: number }> {
-    const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${this.apiKey}`;
+    const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+      address
+    )}&key=${this.apiKey}`;
     try {
       const response = await axios.get(geocodeUrl);
       if (response.data.results && response.data.results.length > 0) {
@@ -48,6 +48,19 @@ export class EstimateRideService {
     } catch (error) {
       console.error(error);
       throw new Error("Erro ao acessar a API de Geocodificação.");
+    }
+  }
+
+  public formatDuration(secondsString: string): string {
+    const seconds = parseInt(secondsString.replace("s", "")); // Remove o 's' e converte para número
+
+    const hours = Math.floor(seconds / 3600); // Calcula as horas
+    const minutes = Math.floor((seconds % 3600) / 60); // Calcula os minutos restantes
+
+    if (hours > 0) {
+      return `${hours}h ${minutes}min`; // Formato para horas e minutos
+    } else {
+      return `${minutes}min`; // Formato para apenas minutos
     }
   }
 
@@ -87,17 +100,23 @@ export class EstimateRideService {
           },
         },
       },
+      travelMode: "DRIVE",
+    };
+    const headers = {
+      "Content-Type": "application/json",
+      "X-Goog-FieldMask":
+        "routes.distanceMeters,routes.duration,routes.polyline.encodedPolyline",
     };
 
     try {
-      const response = await axios.post(url, body);
+      const response = await axios.post(url, body, { headers });
 
       // Verificando a resposta e retornando os dados necessários
       if (response.data.routes && response.data.routes.length > 0) {
         const route = response.data.routes[0];
 
-        const distance = route.legs[0].distanceMeters / 1000; // Convertendo metros para quilômetros
-        const duration = route.legs[0].duration;
+        const distance = route.distanceMeters / 1000; // Convertendo metros para quilômetros
+        const duration = this.formatDuration(route.duration);
         const options = [
           {
             id: 1,
@@ -133,7 +152,7 @@ export class EstimateRideService {
             longitude: destinationCoords.longitude,
           },
           distance,
-          duration: duration.text,
+          duration: duration,
           options,
           routeResponse: response.data, // Incluindo toda a resposta da API do Google (opcional)
         };
