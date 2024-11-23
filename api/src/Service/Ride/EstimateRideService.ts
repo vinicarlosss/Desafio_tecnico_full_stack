@@ -157,7 +157,6 @@ export class EstimateRideService {
           options,
           routeResponse: response.data, // Incluindo toda a resposta da API do Google (opcional)
         };
-
         return result;
       } else {
         throw new Error("Erro ao calcular a rota: Sem rotas disponíveis");

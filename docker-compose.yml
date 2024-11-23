@@ -21,7 +21,7 @@ services:
       context: ./api 
     container_name: api
     environment:
-      MYSQL_HOST: 127.0.0.1 
+      MYSQL_HOST: db 
       MYSQL_PORT: 3306
       MYSQL_USER: app_user
       MYSQL_PASSWORD: app_password
