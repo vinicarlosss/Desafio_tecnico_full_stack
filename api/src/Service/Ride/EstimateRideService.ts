@@ -141,7 +141,7 @@ export class EstimateRideService {
               rating: parsedRating.rating,
               comment: parsedRating.comment,
             },
-            value: parseFloat(formattedTax) * distance,
+            value: parseFloat((parseFloat(formattedTax) * distance).toFixed(2)),
           };
         });
         const result: EstimateRideResponse = {
