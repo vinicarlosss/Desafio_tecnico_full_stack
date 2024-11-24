@@ -1,16 +1,16 @@
 import axios from "axios";
-import RideRepository from "../../Repository/Ride/RideRepository";
 import { EstimateRideResponse } from "../../Controller/Ride/response/EstimatedRideResponse";
 import DriverRepository from "../../Repository/Driver/DriverRepository";
+import { EstimateRideValidator } from "../../Validator/Ride/EstimateRideValidator";
 
 export class EstimateRideService {
-  private rideRepository: RideRepository;
-  private driveRepository: DriverRepository;
+  private driverRepository: DriverRepository;
+  private estimateRideValidator: EstimateRideValidator;
   private apiKey: string;
 
   constructor() {
-    this.rideRepository = new RideRepository();
-    this.driveRepository = new DriverRepository();
+    this.driverRepository = new DriverRepository();
+    this.estimateRideValidator = new EstimateRideValidator();
     this.apiKey = process.env.GOOGLE_API_KEY as string;
   }
 
@@ -20,6 +20,7 @@ export class EstimateRideService {
     destination: string;
   }) {
     try {
+      this.estimateRideValidator.validate(requestBody);
       return await this.calculateRoute(requestBody);
     } catch (error: any) {
       throw new Error(
@@ -55,10 +56,10 @@ export class EstimateRideService {
   }
 
   public formatDuration(secondsString: string): string {
-    const seconds = parseInt(secondsString.replace("s", "")); // Remove o 's' e converte para número
+    const seconds = parseInt(secondsString.replace("s", ""));
 
-    const hours = Math.floor(seconds / 3600); // Calcula as horas
-    const minutes = Math.floor((seconds % 3600) / 60); // Calcula os minutos restantes
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60); 
 
     if (hours > 0) {
       return `${hours}h ${minutes}min`; // Formato para horas e minutos
@@ -125,9 +126,9 @@ export class EstimateRideService {
       if (response.data.routes && response.data.routes.length > 0) {
         const route = response.data.routes[0];
 
-        const distance = route.distanceMeters / 1000; // Convertendo metros para quilômetros
+        const distance = route.distanceMeters / 1000;
         const duration = this.formatDuration(route.duration);
-        const eligibleDrivers = await this.driveRepository.getEligibleDrivers(distance);
+        const eligibleDrivers = await this.driverRepository.getEligibleDrivers(distance);
         const options = eligibleDrivers.map(driver => {
           const parsedRating = this.parseRating(driver.rating);
           const formattedTax = driver.tax.replace(',', '.').replace(/[^\d.]/g, '');
@@ -155,7 +156,7 @@ export class EstimateRideService {
           distance,
           duration: duration,
           options,
-          routeResponse: response.data, // Incluindo toda a resposta da API do Google (opcional)
+          routeResponse: response.data,
         };
         return result;
       } else {

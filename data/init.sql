@@ -26,28 +26,14 @@ CREATE TABLE IF NOT EXISTS Ride (
     distance FLOAT NOT NULL,
     duration INT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
-    rating INT DEFAULT NULL,
-    coment VARCHAR(255),
-    id_driver BIGINT,
-    id_customer VARCHAR(50),
-    car VARCHAR(255),
-    origin_latitude FLOAT,
-    origin_longitude FLOAT,
-    destination_latitude FLOAT,
-    destination_longitude FLOAT,
+    id_driver BIGINT NOT NULL,
+    id_customer VARCHAR(50) NOT NULL,
+    car VARCHAR(255) NOT NULL,
+    origin_name VARCHAR(255) NOT NULL,
+    destination_name VARCHAR(255) NOT NULL,
+    origin_latitude FLOAT NOT NULL,
+    origin_longitude FLOAT NOT NULL,
+    destination_latitude FLOAT NOT NULL,
+    destination_longitude FLOAT NOT NULL,
     FOREIGN KEY (id_driver) REFERENCES Driver(id)
-);
-
--- Criação da tabela de estimativa da corrida.
-CREATE TABLE IF NOT EXISTS EstimateRide (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    distance FLOAT NOT NULL,
-    duration INT NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
-    id_customer VARCHAR(255),
-    origin_latitude FLOAT,
-    origin_longitude FLOAT,
-    destination_latitude FLOAT,
-    destination_longitude FLOAT,
-    status VARCHAR(30) NOT NULL
 );
