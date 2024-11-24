@@ -35,16 +35,12 @@ INSERT INTO Driver (name, description, car, rating, tax, km_minimum) VALUES
 CREATE TABLE IF NOT EXISTS Ride (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     distance FLOAT NOT NULL,
-    duration INT NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
+    duration VARCHAR(255) NOT NULL,
+    value DECIMAL(10, 2) NOT NULL,
     id_driver BIGINT NOT NULL,
     id_customer VARCHAR(50) NOT NULL,
-    car VARCHAR(255) NOT NULL,
-    origin_name VARCHAR(255) NOT NULL,
-    destination_name VARCHAR(255) NOT NULL,
-    origin_latitude FLOAT NOT NULL,
-    origin_longitude FLOAT NOT NULL,
-    destination_latitude FLOAT NOT NULL,
-    destination_longitude FLOAT NOT NULL,
+    date DATETIME,
+    origin VARCHAR(255) NOT NULL,
+    destination VARCHAR(255) NOT NULL,
     FOREIGN KEY (id_driver) REFERENCES Driver(id)
 );

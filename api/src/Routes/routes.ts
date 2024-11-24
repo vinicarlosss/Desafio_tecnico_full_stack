@@ -8,5 +8,5 @@ router.get('/ping', async (_req, res) => {
     res.json('pong');
 });
 router.post('/ride/estimate', rideController.estimateRide.bind(rideController));
-/*router.post('/ride/estimate', rideController.estimateRide);*/
+router.patch('/ride/confirm', rideController.confirmRide.bind(rideController));
 export { router };
