@@ -1,5 +1,7 @@
 import mysql from "mysql2/promise";
 import { DriverRequest } from "../../Models/Driver/DriverRequest";
+import { Ride } from "../../Models/Ride/Ride";
+import { HttpException } from "../../Exception/HttpException";
 
 const dbConfig = {
   host: process.env.MYSQL_HOST,
@@ -39,20 +41,107 @@ class RideRepository {
     VALUES (?, ?, ?, ?, ?, ?, ?, ?);
   `;
     const values = [
-        requestInfo.distance,
-        requestInfo.duration,
-        requestInfo.value,
-        requestInfo.driver.id,
-        requestInfo.customer_id,
-        requestInfo.currentDateTime,
-        requestInfo.origin,
-        requestInfo.destination,
+      requestInfo.distance,
+      requestInfo.duration,
+      requestInfo.value,
+      requestInfo.driver.id,
+      requestInfo.customer_id,
+      requestInfo.currentDateTime,
+      requestInfo.origin,
+      requestInfo.destination,
     ];
-    try{
-        await this.connection.execute(query, values);
-    }catch(error: unknown){
-        throw new Error("Dados fornecidos são inválidos");
+    try {
+      await this.connection.execute(query, values);
+    } catch (error: unknown) {
+      throw new Error("Dados fornecidos são inválidos");
     }
   }
+
+  public async findAllByCustomerId(customer_id: string) {
+    const query = `
+      SELECT 
+        r.id,
+        r.date,
+        r.origin,
+        r.destination,
+        r.duration,
+        r.value,
+        d.id AS driver_id,
+        d.name AS driver_name
+      FROM 
+        Ride r
+      INNER JOIN 
+        Driver d 
+      ON 
+        r.id_driver = d.id
+      WHERE 
+        r.id_customer = ?;
+    `;
+    const [rows] = await this.connection.execute<any[]>(query, [customer_id]);
+    if (rows.length > 0) {
+      return (rows as any[]).map((row) => ({
+        id: row.id,
+        date: row.date,
+        origin: row.origin,
+        destination: row.destination,
+        duration: row.duration,
+        driver: {
+          id: row.driver_id,
+          name: row.driver_name,
+        },
+        value: row.value,
+      }));
+    }
+    throw new HttpException(
+      404,
+      "NO_RIDES_FOUND",
+      "Não foram encontrados registros de corridas para o cliente especificado."
+    );
+  }
+  public async findAllByCustomerIdAndDriverID(
+    customer_id: string,
+    driver_id: number | undefined
+  ) {
+    const query = `
+      SELECT 
+        r.id,
+        r.date,
+        r.origin,
+        r.destination,
+        r.duration,
+        r.value,
+        d.id AS driver_id,
+        d.name AS driver_name
+      FROM 
+        Ride r
+      INNER JOIN 
+        Driver d 
+      ON 
+        r.id_driver = d.id
+      WHERE 
+        r.id_customer = ? AND r.id_driver = ?;
+    `;
+    const [rows] = await this.connection.execute<any[]>(query, [customer_id, driver_id]);
+    if (rows.length > 0) {
+      return (rows as any[]).map((row) => ({
+        id: row.id,
+        date: row.date,
+        origin: row.origin,
+        destination: row.destination,
+        duration: row.duration,
+        driver: {
+          id: row.driver_id,
+          name: row.driver_name,
+        },
+        value: row.value,
+      }));
+    }
+    throw new HttpException(
+      404,
+      "NO_RIDES_FOUND",
+      "Não foram encontrados registros de corridas para o cliente ou motorista especificados."
+    );
+  }
 }
+
 export default RideRepository;

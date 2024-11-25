@@ -3,6 +3,7 @@ import { EstimateRideResponse } from "../../Controller/Ride/response/EstimatedRi
 import DriverRepository from "../../Repository/Driver/DriverRepository";
 import { EstimateRideValidator } from "../../Validator/Ride/EstimateRideValidator";
 import { HttpException } from "../../Exception/HttpException";
+import { Driver } from "../../Models/Driver/Driver";
 
 export class EstimateRideService {
   private driverRepository: DriverRepository;
@@ -125,7 +126,7 @@ export class EstimateRideService {
 
         const distance = route.distanceMeters / 1000;
         const duration = this.formatDuration(route.duration);
-        const eligibleDrivers = await this.driverRepository.getEligibleDrivers(distance);
+        const eligibleDrivers: Driver[] = await this.driverRepository.getEligibleDrivers(distance);
         const options = eligibleDrivers.map(driver => {
           const parsedRating = this.parseRating(driver.rating);
           const formattedTax = driver.tax.replace(',', '.').replace(/[^\d.]/g, '');
