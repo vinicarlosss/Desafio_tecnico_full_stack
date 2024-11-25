@@ -1,4 +1,4 @@
-import mysql from "mysql2/promise";
+import mysql, { QueryResult } from "mysql2/promise";
 import { Driver } from "../../Models/Driver/Driver";
 
 const dbConfig = {
@@ -15,7 +15,7 @@ class DriverRepository {
     this.connection = mysql.createPool(dbConfig);
   }
 
-  async getEligibleDrivers(distance: number): Promise<Driver[]> {
+  public async getEligibleDrivers(distance: number): Promise<Driver[]> {
     
     const query = `
     SELECT * FROM Driver
@@ -24,6 +24,18 @@ class DriverRepository {
     `;
     const [rows] = await this.connection.execute(query, [distance]);
     return rows as Driver[];
+  }
+
+  public async getById(driverId: number): Promise<Driver | null>{
+    const query = `
+      Select * from Driver 
+      WHERE id = ?
+    `;
+    const [rows] = await this.connection.execute(query, [driverId]);
+    if(Array.isArray(rows) && rows.length > 0){
+      return rows[0] as Driver;
+    }
+    return null;
   }
 }
 export default DriverRepository;

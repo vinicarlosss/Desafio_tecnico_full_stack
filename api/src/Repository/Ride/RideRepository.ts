@@ -1,6 +1,5 @@
 import mysql from "mysql2/promise";
-import { Driver } from "../../Models/Driver/Driver";
-import { DriverDTO } from "../../Models/Driver/DriverDTO";
+import { DriverRequest } from "../../Models/Driver/DriverRequest";
 
 const dbConfig = {
   host: process.env.MYSQL_HOST,
@@ -22,7 +21,7 @@ class RideRepository {
     destination: string;
     distance: number;
     duration: string;
-    driver: DriverDTO;
+    driver: DriverRequest;
     value: number;
     currentDateTime: string;
   }) {

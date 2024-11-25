@@ -1,4 +1,4 @@
-export interface DriverDTO{
+export interface DriverRequest{
     id: number;
     name: string;
 }
