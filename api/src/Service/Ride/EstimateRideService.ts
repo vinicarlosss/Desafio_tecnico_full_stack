@@ -2,6 +2,7 @@ import axios from "axios";
 import { EstimateRideResponse } from "../../Controller/Ride/response/EstimatedRideResponse";
 import DriverRepository from "../../Repository/Driver/DriverRepository";
 import { EstimateRideValidator } from "../../Validator/Ride/EstimateRideValidator";
+import { HttpException } from "../../Exception/HttpException";
 
 export class EstimateRideService {
   private driverRepository: DriverRepository;
@@ -19,14 +20,8 @@ export class EstimateRideService {
     origin: string;
     destination: string;
   }) {
-    try {
       this.estimateRideValidator.validate(requestBody);
       return await this.calculateRoute(requestBody);
-    } catch (error: any) {
-      throw new Error(
-        `Erro ao calcular a estimativa da viagem: ${error.message}`
-      );
-    }
   }
 
   // Função para obter as coordenadas (latitude e longitude) de um endereço
@@ -45,13 +40,15 @@ export class EstimateRideService {
           longitude: location.lng,
         };
       } else {
-        throw new Error(
+        
+        throw new HttpException(400,
+          "INVALID_DATA",
           "Não foi possível encontrar as coordenadas para o endereço informado."
         );
       }
     } catch (error) {
       console.error(error);
-      throw new Error("Erro ao acessar a API de Geocodificação.");
+      throw new HttpException(400, "INVALID_DATA", "Erro ao acessar a API de Geocodificação: Não foi possível encontrar as coordenadas para o endereço informado.");
     }
   }
 
@@ -160,11 +157,11 @@ export class EstimateRideService {
         };
         return result;
       } else {
-        throw new Error("Erro ao calcular a rota: Sem rotas disponíveis");
+        throw new HttpException(400, "INVALID_DATA", "Erro ao calcular a rota: Sem rotas disponíveis");
       }
     } catch (error) {
       console.error(error);
-      throw new Error("Erro ao acessar a API do Google Routes.");
+      throw new HttpException(400, "INVALID_DATA", "Erro ao calcular a rota: Erro ao acessar a API do Google Routes.");
     }
   }
 }
