@@ -1,4 +1,5 @@
 export interface RideEstimateResponse {
+  customer_id: string;
   origin: Coordinates;
   destination: Coordinates;
   originString: string;

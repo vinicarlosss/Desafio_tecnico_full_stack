@@ -2,6 +2,7 @@ import "./travelOptions.style.css";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useDataContext, usePage } from "../../../Hook/";
 import { DriverCard, Header, Map } from "../../Components";
+import { ToastContainer } from "react-toastify";
 
 export function TravelOptions() {
   const { sharedData } = useDataContext();
@@ -10,7 +11,7 @@ export function TravelOptions() {
   const encodedPolyLine: string | undefined =
     sharedData?.routeResponse?.routes[0].polyline.encodedPolyline;
   const driversPerPage = 3;
-  const indexOfLastDriver = ( page+1 ) * driversPerPage;
+  const indexOfLastDriver = ( page + 1 ) * driversPerPage;
   const indexOfFirstDriver = indexOfLastDriver - driversPerPage;
   const currentDrivers = driverOptions?.slice(
     indexOfFirstDriver,
@@ -47,6 +48,19 @@ export function TravelOptions() {
             <FaChevronRight />
           </button>
         </section>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          style={{ textAlign: "justify", zIndex: "200" }}
+        />
       </main>
     </>
   );

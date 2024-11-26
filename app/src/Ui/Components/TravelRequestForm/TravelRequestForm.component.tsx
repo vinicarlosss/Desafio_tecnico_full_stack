@@ -37,6 +37,7 @@ export function TravelRequestForm({
       let data = response.data;
       data = {
         ...data,
+        customer_id: customer_id,
         originString: origin,
         destinationString: destination
       }
