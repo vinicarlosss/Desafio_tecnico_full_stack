@@ -5,22 +5,24 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import loadingGif from "../../../Assets/loading.gif";
 import { Dispatch, SetStateAction } from "react";
+import { useDataContext } from "../../../Hook/UseDataContext/useDataContext";
+import { useNavigate } from "react-router-dom";
 
 export function TravelRequestForm({
   loading,
-  setLoading,
-  setRequestMade
+  setLoading
 }: {
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
-  setRequestMade: Dispatch<SetStateAction<boolean>>;
 }) {
   const { formInputs, handleChange } = useFormInputs({
     customer_id: "",
     origin: "",
     destination: "",
   });
+  const { setSharedData } = useDataContext();
   const { notify } = useNotify();
+  const navigate = useNavigate();
 
   async function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -32,8 +34,9 @@ export function TravelRequestForm({
         origin,
         destination,
       });
+      setSharedData(response.data);
       setLoading(false);
-      setRequestMade(true);
+      navigate("/travelOptions");
     } catch (error: any) {
       setLoading(false);
       notify(error.response.data.error_description);

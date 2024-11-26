@@ -1,10 +1,13 @@
-import './App.css';
-import { RouterProvider } from 'react-router';
-import { router } from './Router';
+import "./App.css";
+import { RouterProvider } from "react-router";
+import { router } from "./Router";
+import { DataProvider } from "./Context/DataContext";
 
 function App() {
   return (
-    <RouterProvider router={router}/>
+    <DataProvider>
+      <RouterProvider router={router} />
+    </DataProvider>
   );
 }
 
