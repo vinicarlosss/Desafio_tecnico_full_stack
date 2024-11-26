@@ -1,1 +1,2 @@
-export { UseFormInputs } from "./UseFormInputs/UseFormInputs.hook";
+export { useFormInputs } from "./UseFormInputs/useFormInputs.hook";
+export { useNotify } from "./UseNotify/useNotify";

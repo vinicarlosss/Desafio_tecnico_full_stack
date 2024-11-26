@@ -3,8 +3,7 @@ import { API_URL } from "../../Constants";
 import { axiosInstance } from "../_base/axios.instance";
 import { RideEstimateResponse } from "../../Models/RideEstimateResponse";
 
-
-export async function EstimateRide({
+export async function estimateRide({
   customer_id,
   origin,
   destination,
@@ -12,11 +11,11 @@ export async function EstimateRide({
   customer_id: string;
   origin: string;
   destination: string;
-}): Promise<AxiosResponse<RideEstimateResponse>>{
-    const response = await axiosInstance.post(API_URL, {
-        customer_id,
-        origin,
-        destination
-    });
-    return response;
+}): Promise<AxiosResponse<RideEstimateResponse>> {
+  const response = await axiosInstance.post(`${API_URL}/ride/estimate`, {
+    customer_id,
+    origin,
+    destination,
+  });
+  return response;
 }

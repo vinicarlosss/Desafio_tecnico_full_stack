@@ -1,9 +1,11 @@
 import dotenv from "dotenv";
 import path from "path";
 import fs from 'fs';
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 import bodyParser from "body-parser";
 import  errorHandler  from "./Middlewares/ErrorHandler";
+import cors from "cors";
+import { corsOptions } from "./Config/CorsOptions";
 
 
 const rootEnvPath = path.resolve(__dirname, "../../.env");
@@ -14,8 +16,8 @@ if(fs.existsSync(rootEnvPath)){
   dotenv.config({ path: apiEnvPath });
 }
 import { router } from "./Routes/routes";
-import { HttpException } from "./Exception/HttpException";
 const app = express();
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(router);
 app.use(errorHandler);

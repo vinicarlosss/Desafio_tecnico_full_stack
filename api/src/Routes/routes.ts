@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { RideController } from "../Controller/Ride/RideController";
+import cors from "cors";
 
 const rideController = new RideController();
 const router = Router();

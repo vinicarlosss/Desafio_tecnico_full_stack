@@ -11,7 +11,7 @@ export function TravelRequest() {
   return (
     <>
       <Header />
-      {requestMade ? null:<TravelRequestForm/>}
+      {requestMade ? null:<TravelRequestForm loading={loading} setLoading={setLoading} setRequestMade = {setRequestMade}/>}
       
     </>
   );

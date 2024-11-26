@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { FormInputs } from "../../Models/FormInputs";
 
-export function UseFormInputs(initialValue: object){
-    const [formInputs, setFormInputs] = useState(initialValue);
+export function useFormInputs(initialValue: FormInputs){
+    const [formInputs, setFormInputs] = useState<FormInputs>(initialValue);
     function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
         const {name, value} = event.target;
         setFormInputs((oldFormInputs) => ({
