@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 export function Header() {
   return (
     <header className="app-header">
-      <div className="container">
         <Link to="/">
           <img className="app-header_logo" alt="logo da aplicação" src={logo} />
         </Link>
@@ -20,7 +19,6 @@ export function Header() {
             </li>
           </ul>
         </nav>
-      </div>
     </header>
   );
 }
