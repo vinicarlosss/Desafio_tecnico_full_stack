@@ -1,0 +1,67 @@
+.app-header {
+  background-color: #007bff;
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.logo a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.app-header_logo {
+  width: 120px; 
+  height: auto;
+  transition: transform 0.3s ease; 
+  border-radius: 2rem;
+}
+
+.app-header_logo:hover {
+    transform: scale(1.1);
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.5rem 1rem; 
+    border-radius: 8px; 
+    background-color: transparent; 
+    transition: all 0.3s ease; 
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
+  }
+  
+  /* Efeito ao passar o mouse */
+  .nav-links li a:hover {
+    background-color: #ffffff; 
+    color: #007bff; 
+    transform: translateY(-4px); 
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); 
+  }
+  
+  
+  .nav-links li a:focus,
+  .nav-links li a:active {
+    transform: translateY(0); 
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
+  }
