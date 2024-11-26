@@ -1,4 +1,5 @@
 import "./travelOptions.style.css";
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useDataContext, usePage } from "../../../Hook/";
 import { DriverCard, Header, Map } from "../../Components";
 
@@ -23,21 +24,28 @@ export function TravelOptions() {
       <Header />
       <main className="travelOptions_main">
         <Map encodedPolyLine={encodedPolyLine} />
-        <section className="travelOptions_drivers--section">
-          {currentDrivers?.map((driver) => (
-            <DriverCard key={driver.id} driver={driver} />
-          ))}
-          {( driverOptions?.length || 0 ) <= driversPerPage ? null :(
-            <div className="pagination">
-            <button onClick={handlePreviousPage} disabled={page === 0}>
-              Anterior
-            </button>
-            <span>Página { page + 1 }</span>
-            <button onClick={handleNextPage} disabled={!hasMoreDrivers}>
-              Próxima
-            </button>
+        <section className="travelOptions_drivers--container">
+          <button
+            onClick={handlePreviousPage}
+            disabled={page === 0}
+            className="pagination-arrow left-arrow"
+          >
+            <FaChevronLeft />
+          </button>
+          
+          <div className="travelOptions_drivers--list">
+            {currentDrivers?.map((driver) => (
+              <DriverCard key={driver.id} driver={driver} />
+            ))}
           </div>
-          )}
+
+          <button
+            onClick={handleNextPage}
+            disabled={!hasMoreDrivers}
+            className="pagination-arrow right-arrow"
+          >
+            <FaChevronRight />
+          </button>
         </section>
       </main>
     </>
