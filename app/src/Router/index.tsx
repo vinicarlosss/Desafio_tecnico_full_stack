@@ -5,5 +5,9 @@ export const router = createBrowserRouter([
     {
         path: "/",
         element: <uiScreens.TravelRequest/>
+    },
+    {
+        path: "/travelOptions",
+        element: <uiScreens.TravelOptions/>
     }
 ]);

@@ -1,10 +1,5 @@
--- Criação do banco de dados
 CREATE DATABASE IF NOT EXISTS app_db;
-
--- Seleção do banco de dados para uso
 USE app_db;
-
--- Criação da tabela Motorista
 CREATE TABLE IF NOT EXISTS Driver (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -14,7 +9,6 @@ CREATE TABLE IF NOT EXISTS Driver (
     tax VARCHAR(255),
     km_minimum INT
 );
-
 INSERT INTO Driver (name, description, car, rating, tax, km_minimum) VALUES
 ('Dominic Toretto', 'Ei, aqui é o Dom. Pode entrar, vou te levar com segurança e rapidez ao seu destino. Só não mexa no rádio, a playlist é sagrada.', 'Dodge Charger R/T 1970 modificado', '4/5 - Que viagem incrível! O carro é um show à parte e o motorista, apesar de ter uma cara de poucos amigos, foi super gente boa. Recomendo!', 'R$ 5,00/km', 5),
 ('Homer Simpson', 'Olá! Sou o Homer, seu motorista camarada! Relaxe e aproveite o passeio, com direito a rosquinhas e boas risadas (e talvez alguns desvios).', 'Plymouth Valiant 1973 rosa e enferrujado', '2/5 - Motorista simpático, mas errou o caminho 3 vezes. O carro cheira a donuts.', 'R$ 2,50/km', 1),
@@ -30,8 +24,6 @@ INSERT INTO Driver (name, description, car, rating, tax, km_minimum) VALUES
 ('Han Solo', 'Ei, é o Han. Não pergunte sobre o passado, só aproveite a viagem.', 'Millennium Falcon em modo terrestre', '4/5 - Motorista habilidoso, mas às vezes se distrai com histórias.', 'R$ 5,00/km', 5),
 ('Diana Prince', 'Sou Diana, sua motorista amazona. Força, graça e segurança em cada viagem.', 'Aston Martin vintage', '5/5 - Condução tranquila e elegante. Experiência excelente.', 'R$ 12,00/km', 12);
 
-
--- Criação da tabela Corrida Confirmada
 CREATE TABLE IF NOT EXISTS Ride (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     distance FLOAT NOT NULL,
@@ -39,7 +31,7 @@ CREATE TABLE IF NOT EXISTS Ride (
     value DECIMAL(10, 2) NOT NULL,
     id_driver BIGINT NOT NULL,
     id_customer VARCHAR(50) NOT NULL,
-    date DATETIME,
+    date DATETIME NOT NULL,
     origin VARCHAR(255) NOT NULL,
     destination VARCHAR(255) NOT NULL,
     FOREIGN KEY (id_driver) REFERENCES Driver(id)

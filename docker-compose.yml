@@ -14,37 +14,37 @@ services:
       - ./data/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app_network
-#volumes:
+  #volumes:
   #db_data:
   api:
     build:
-      context: ./api 
+      context: ./api
     container_name: api
     environment:
-      MYSQL_HOST: db 
+      MYSQL_HOST: db
       MYSQL_PORT: 3306
       MYSQL_USER: app_user
       MYSQL_PASSWORD: app_password
       MYSQL_DATABASE: app_db
-      GOOGLE_API_KEY: ${GOOGLE_API_KEY} 
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
     ports:
-      - "8080:8080" 
+      - "8080:8080"
     depends_on:
-      - db 
+      - db
     networks:
       - app_network
-    command: npm start 
+    command: npm start
 
   frontend:
-      build:
-        context: ./app
-      container_name: frontend
-      ports:
-        - "80:3000"
-      networks:
-        - app_network
-      environment:
-        - CHOKIDAR_USEPOLLING=true
+    build:
+      context: ./app
+    container_name: frontend
+    ports:
+      - "80:3000"
+    networks:
+      - app_network
+    environment:
+      - CHOKIDAR_USEPOLLING=true
 
 networks:
   app_network:

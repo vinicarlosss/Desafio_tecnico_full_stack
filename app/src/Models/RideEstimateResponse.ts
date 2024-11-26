@@ -4,7 +4,7 @@ export interface RideEstimateResponse {
   distance: number;
   duration: string;
   options: RideOption[];
-  routeResponse: RouteResponse;
+  routeResponse: Routes;
 }
 
 interface Coordinates {
@@ -30,6 +30,10 @@ interface RouteResponse {
   distanceMeters: number;
   duration: string;
   polyline: Polyline;
+}
+
+interface Routes {
+  routes: RouteResponse[];
 }
 
 interface Polyline {
