@@ -1,0 +1,37 @@
+.travelOptions_main {
+  display: flex;
+  justify-content: center;
+}
+
+.travelOptions_drivers--section {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding: 1rem 1rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 16px;
+}

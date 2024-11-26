@@ -10,7 +10,6 @@ export function TravelRequest() {
     <>
       <Header />
       <TravelRequestForm loading={loading} setLoading={setLoading}/>
-      
     </>
   );
 }

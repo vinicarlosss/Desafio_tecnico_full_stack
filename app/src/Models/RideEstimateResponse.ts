@@ -1,6 +1,8 @@
 export interface RideEstimateResponse {
   origin: Coordinates;
   destination: Coordinates;
+  originString: string;
+  destinationString: string;
   distance: number;
   duration: string;
   options: RideOption[];

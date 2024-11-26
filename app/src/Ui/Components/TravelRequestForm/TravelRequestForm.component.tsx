@@ -34,7 +34,13 @@ export function TravelRequestForm({
         origin,
         destination,
       });
-      setSharedData(response.data);
+      let data = response.data;
+      data = {
+        ...data,
+        originString: origin,
+        destinationString: destination
+      }
+      setSharedData(data);
       setLoading(false);
       navigate("/travelOptions");
     } catch (error: any) {
