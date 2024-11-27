@@ -1,34 +1,34 @@
-.travelHistory--main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 70vh;
-    padding: 1rem 0;
+.travelHistory--main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 70vh;
+  padding: 1rem 0;
 }
 
-.travelHistory--form{
-    display: flex;
-    gap: 1rem;
-    width: 50%;
+.travelHistory--form {
+  display: flex;
+  gap: 1rem;
+  width: 50%;
 }
 
-.travelHistory--form span{
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 4px;
-    font-weight: 600;
+.travelHistory--form span {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 4px;
+  font-weight: 600;
 }
 
 .travelHistory--form input,
 .travelHistory--form select,
 .travelHistory--form button {
-    padding: 10px 14px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    font-size: 14px;
-    width: 100%;
-    box-sizing: border-box;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .travelHistory--form input:focus,
@@ -55,13 +55,13 @@
   cursor: not-allowed;
 }
 
-.travelHistory_travels--section{
+.travelHistory_travels--section {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.rides-container {
+.travelHistory--card--div {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -72,49 +72,11 @@
   border-radius: 8px;
 }
 
-.ride-card {
-  flex: 1 1 calc(30% - 1rem);
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  min-width: 250px; 
-  max-width: 300px; 
-}
-
-.ride-header h3 {
-  margin: 0;
-  font-size: 18px;
-  color: #333;
-}
-
-.ride-header .ride-date {
-  font-size: 14px;
-  color: #777;
-  margin-top: 4px;
-}
-
-.ride-details p {
-  margin: 8px 0;
-  font-size: 14px;
-  color: #555;
-}
-
-.ride-details strong {
-  color: #333;
-}
-
-.rides-container .ride-card:hover {
-  border-color: #007bff;
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
-}
-
 .pagination-arrow {
   background: none;
   border: none;
   font-size: 36px;
-  color: #4CAF50;
+  color: #4caf50;
   cursor: pointer;
   transition: transform 0.3s;
   display: flex;

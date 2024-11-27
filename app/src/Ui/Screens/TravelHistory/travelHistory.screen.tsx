@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getRides } from "../../../Api/Ride/getRides.api";
 import { useNotify, usePage, useTravelHistoryFormInputs } from "../../../Hook";
 import { GetRidesResponse } from "../../../Models/GetRidesResponse";
-import { Header } from "../../Components";
+import { Header, TravelCard } from "../../Components";
 import "./travelHistory.style.css";
 import { ToastContainer } from "react-toastify";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -25,7 +25,7 @@ export function TravelHistory() {
   const currentTravels = travelHistory
     ?.slice(indexOfFirstTravel, indexOfLastRide)
     ?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  const hasMoreDrivers =
+  const hasMoreTravels =
     currentTravels && currentTravels.length === travelsPerPage;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -83,50 +83,14 @@ export function TravelHistory() {
           >
             <FaChevronLeft />
           </button>
-          <div className="rides-container">
-            {currentTravels?.map((ride) => (
-              <div key={ride.id} className="ride-card">
-                <div className="ride-header">
-                  <h3>Viagem #{ride.id}</h3>
-                  <p className="ride-date">
-                    {new Date(ride.date).toLocaleDateString("pt-BR", {
-                      day: "2-digit",
-                      month: "2-digit",
-                      year: "numeric",
-                    })}{" "}
-                    às{" "}
-                    {new Date(ride.date).toLocaleTimeString("pt-BR", {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </p>
-                </div>
-                <div className="ride-details">
-                  <p>
-                    <strong>Motorista:</strong> {ride.driver.name}
-                  </p>
-                  <p>
-                    <strong>Origem:</strong> {ride.origin}
-                  </p>
-                  <p>
-                    <strong>Destino:</strong> {ride.destination}
-                  </p>
-                  <p>
-                    <strong>Distância</strong> {ride.distance.toFixed(2)} Km
-                  </p>
-                  <p>
-                    <strong>Duração:</strong> {ride.duration}
-                  </p>
-                  <p>
-                    <strong>Valor:</strong> R$ {ride.value}
-                  </p>
-                </div>
-              </div>
+          <div className="travelHistory--card--div">
+            {currentTravels?.map((travel) => (
+              <TravelCard key={travel.id} travel = {travel}/>
             ))}
           </div>
           <button
             onClick={handleNextPage}
-            disabled={!hasMoreDrivers}
+            disabled={!hasMoreTravels}
             className="pagination-arrow right-arrow"
           >
             <FaChevronRight />

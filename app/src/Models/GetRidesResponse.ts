@@ -3,7 +3,7 @@ export interface GetRidesResponse{
     rides: Ride[];
 };
 
-interface Ride{
+export interface Ride{
     id: number;
     date: string;
     origin: string;
