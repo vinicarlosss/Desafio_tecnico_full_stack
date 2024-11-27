@@ -1,5 +1,6 @@
 import mysql, { QueryResult } from "mysql2/promise";
 import { Driver } from "../../Models/Driver/Driver";
+import { GetAllDriverResponse } from "../../Controller/Driver/response/GetAllDriverResponse";
 
 const dbConfig = {
   host: process.env.MYSQL_HOST,
@@ -36,6 +37,15 @@ class DriverRepository {
       return rows[0] as Driver;
     }
     return null;
+  }
+
+  public async getAll(): Promise<GetAllDriverResponse[]>{
+    const query = `Select d.id, d.name from Driver as d`;
+    const [rows] = await this.connection.execute(query);
+    if(Array.isArray(rows) && rows.length > 0){
+      return rows as GetAllDriverResponse[];
+    }
+    return [];
   }
 }
 export default DriverRepository;

@@ -2,8 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { EstimateRideService } from "../../Service/Ride/EstimateRideService";
 import { ConfirmRideService } from "../../Service/Ride/ConfirmRideService";
 import { GetRidesService } from "../../Service/Ride//GetRidesService";
-import { GetRidesResponse } from "./response/GetRidesResponse";
-import { json } from "stream/consumers";
 
 export class RideController {
   private estimateRideService: EstimateRideService;
@@ -14,7 +12,7 @@ export class RideController {
     this.estimateRideService = new EstimateRideService();
     this.confirmRideService = new ConfirmRideService();
     this.getRidesService = new GetRidesService();
-  }
+  };
 
   async estimateRide(
     req: Request,
