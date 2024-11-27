@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
         element: <uiScreens.TravelOptions/>
     },
     {
-        path: "historico",
+        path: "/historico",
         element: <uiScreens.TravelHistory/>
     }
 ]);
