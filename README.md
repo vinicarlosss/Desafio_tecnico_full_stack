@@ -58,8 +58,8 @@ Como funciona a aplicação:
 ### 1. Consultar o valor da corrida:
 
 O usuário informa a origem e o destino da viagem.
-A aplicação consulta a Google Routes API para calcular a melhor rota entre a origem e o destino.
-O valor da corrida é estimado com base na distância e no tempo de viagem.
+A aplicação consulta a Google Routes API para calcular a melhor rota entre a origem e o destino, o usuário também poderá ver visualmente a rota a ser percorrida através de um mapa estático.
+O valor da corrida é estimado com base na distância da viagem.
 ### 2. Exibir motoristas disponíveis:
 
 A aplicação consulta os motoristas registrados no banco de dados.
@@ -68,10 +68,6 @@ Para cada motorista, a interface exibe o nome, a avaliação, o veículo e o val
 
 O usuário escolhe um motorista disponível e confirma a corrida.
 A confirmação da corrida é processada pela API, que também registra a escolha no banco de dados.
-### 4. Mostrar detalhes da rota:
+### 4. Histórico de corridas:
 
-Ao confirmar a corrida, o usuário pode visualizar os detalhes da rota, incluindo a distância, duração e o caminho a ser seguido.
-### 5. Exibir avaliações dos motoristas:
-
-Cada motorista tem uma média de avaliações que é mostrada na interface.
-O usuário pode ver as avaliações feitas por outros clientes para tomar uma decisão informada.
+O usuário terá a possibilidade de consultar o histórico de corridas realizadas, com a opção de visualizar todas as corridas ou filtrar apenas aquelas realizadas com um motorista específico.
