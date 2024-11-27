@@ -32,6 +32,7 @@ Crie um arquivo .env na raiz do projeto e configure as variáveis necessárias p
 ```bash
 GOOGLE_API_KEY: A sua chave da API do Google Routes
 ```
+**Aviso:** Para que o projeto funcione corretamente, é necessário possuir uma chave de API do Google com as seguintes bibliotecas ativas: **Geocoding API**, **Routes API** e **Maps Static API**.
 
 ### 3. Suba o ambiente Docker
 
