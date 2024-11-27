@@ -38,7 +38,7 @@ GOOGLE_API_KEY: A sua chave da API do Google Routes
 Com o Docker e Docker Compose instalados, execute o comando abaixo para construir e rodar os containers:
 
 ```bash
-docker-compose up --build
+docker compose up
 ```
 
 Isso irá:
