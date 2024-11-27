@@ -1,6 +1,5 @@
 import mysql from "mysql2/promise";
 import { DriverRequest } from "../../Models/Driver/DriverRequest";
-import { Ride } from "../../Models/Ride/Ride";
 import { HttpException } from "../../Exception/HttpException";
 
 const dbConfig = {

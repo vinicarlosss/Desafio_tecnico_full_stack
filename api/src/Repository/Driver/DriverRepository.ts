@@ -1,4 +1,4 @@
-import mysql, { QueryResult } from "mysql2/promise";
+import mysql from "mysql2/promise";
 import { Driver } from "../../Models/Driver/Driver";
 import { GetAllDriverResponse } from "../../Controller/Driver/response/GetAllDriverResponse";
 import { HttpException } from "../../Exception/HttpException";

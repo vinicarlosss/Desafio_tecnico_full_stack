@@ -1,5 +1,4 @@
 import { ConfirmRideResponse } from "../../Controller/Ride/response/ConfirmRideResponse";
-import { HttpException } from "../../Exception/HttpException";
 import { DriverRequest } from "../../Models/Driver/DriverRequest";
 import RideRepository from "../../Repository/Ride/RideRepository";
 import { ConfirmRideValidator } from "../../Validator/Ride/ConfirmRideValidator";
