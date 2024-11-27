@@ -91,7 +91,7 @@ export function TravelRequestForm({
           </div>
           {loading ? (<img className="travelRequestForm--loading" src={loadingGif} alt="gif para representar carregamento da requisição"/>) : (
             <button type="submit" className="travelRequestForm--form_button">
-              Procurar motorista
+              Procurar Viagem
             </button>
           )}
         </form>
