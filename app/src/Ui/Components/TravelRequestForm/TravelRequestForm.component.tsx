@@ -1,6 +1,6 @@
 import "./TravelRequestForm.style.css";
-import { useFormInputs, useNotify } from "../../../Hook/index";
-import { estimateRide } from "../../../Api/index";
+import { useTravelRequestFormInputs, useNotify } from "../../../Hook/index";
+import { estimateRideValue } from "../../../Api/index";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import loadingGif from "../../../Assets/loading.gif";
@@ -15,7 +15,7 @@ export function TravelRequestForm({
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { formInputs, handleChange } = useFormInputs({
+  const { travelRequestFormInputs, handleChange } = useTravelRequestFormInputs({
     customer_id: "",
     origin: "",
     destination: "",
@@ -27,9 +27,9 @@ export function TravelRequestForm({
   async function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
-    const { customer_id, origin, destination } = formInputs;
+    const { customer_id, origin, destination } = travelRequestFormInputs;
     try {
-      const response = await estimateRide({
+      const response = await estimateRideValue({
         customer_id,
         origin,
         destination,

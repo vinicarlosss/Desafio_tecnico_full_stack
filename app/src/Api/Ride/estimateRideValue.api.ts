@@ -3,7 +3,7 @@ import { API_URL } from "../../Constants";
 import { axiosInstance } from "../_base/axios.instance";
 import { RideEstimateResponse } from "../../Models/RideEstimateResponse";
 
-export async function estimateRide({
+export async function estimateRideValue({
   customer_id,
   origin,
   destination,

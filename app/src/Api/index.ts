@@ -1,2 +1,2 @@
-export { estimateRide } from "./Ride/estimateRide.api";
+export { estimateRideValue } from "./Ride/estimateRideValue.api";
 export { confirmRide } from "./Ride/confirmRide.api";
