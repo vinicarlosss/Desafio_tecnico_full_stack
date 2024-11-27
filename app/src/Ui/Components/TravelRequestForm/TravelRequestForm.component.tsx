@@ -43,7 +43,7 @@ export function TravelRequestForm({
       }
       setSharedData(data);
       setLoading(false);
-      navigate("/travelOptions");
+      navigate("/opcoesViagens");
     } catch (error: any) {
       setLoading(false);
       notify(error.response.data.error_description);

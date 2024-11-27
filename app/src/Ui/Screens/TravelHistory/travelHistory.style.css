@@ -1,0 +1,140 @@
+.travelHistory--main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 70vh;
+    padding: 1rem 0;
+}
+
+.travelHistory--form{
+    display: flex;
+    gap: 1rem;
+    width: 50%;
+}
+
+.travelHistory--form span{
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.travelHistory--form input,
+.travelHistory--form select,
+.travelHistory--form button {
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.travelHistory--form input:focus,
+.travelHistory--form select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.travelHistory--form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.travelHistory--form button:hover {
+  background-color: #0056b3;
+}
+
+.travelHistory--form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.travelHistory_travels--section{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.rides-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 20px;
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.ride-card {
+  flex: 1 1 calc(30% - 1rem);
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-width: 250px; 
+  max-width: 300px; 
+}
+
+.ride-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.ride-header .ride-date {
+  font-size: 14px;
+  color: #777;
+  margin-top: 4px;
+}
+
+.ride-details p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.ride-details strong {
+  color: #333;
+}
+
+.rides-container .ride-card:hover {
+  border-color: #007bff;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+.pagination-arrow {
+  background: none;
+  border: none;
+  font-size: 36px;
+  color: #4CAF50;
+  cursor: pointer;
+  transition: transform 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-arrow:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-arrow:hover:not(:disabled) {
+  transform: scale(1.1);
+}
+
+.left-arrow {
+  margin-right: 5px;
+}
+
+.right-arrow {
+  margin-left: 5px;
+}

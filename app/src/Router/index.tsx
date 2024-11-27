@@ -7,7 +7,11 @@ export const router = createBrowserRouter([
         element: <uiScreens.TravelRequest/>
     },
     {
-        path: "/travelOptions",
+        path: "/opcoesViagens",
         element: <uiScreens.TravelOptions/>
+    },
+    {
+        path: "historico",
+        element: <uiScreens.TravelHistory/>
     }
 ]);
