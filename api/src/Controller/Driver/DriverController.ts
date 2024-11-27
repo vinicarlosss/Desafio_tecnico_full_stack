@@ -15,7 +15,6 @@ export class DriverController{
         next: NextFunction
     ): Promise<void>{
         try{
-            const body = req.body;
             const result = await this.getAllDriverService.getAll();
             res.status(200).json(result);
         } catch(error){

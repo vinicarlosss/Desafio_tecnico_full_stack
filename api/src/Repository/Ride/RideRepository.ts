@@ -112,7 +112,7 @@ class RideRepository {
         r.destination,
         r.duration,
         r.value,
-        r,distance,
+        r.distance,
         d.id AS driver_id,
         d.name AS driver_name
       FROM 

@@ -1,6 +1,7 @@
 import mysql, { QueryResult } from "mysql2/promise";
 import { Driver } from "../../Models/Driver/Driver";
 import { GetAllDriverResponse } from "../../Controller/Driver/response/GetAllDriverResponse";
+import { HttpException } from "../../Exception/HttpException";
 
 const dbConfig = {
   host: process.env.MYSQL_HOST,
@@ -45,7 +46,7 @@ class DriverRepository {
     if(Array.isArray(rows) && rows.length > 0){
       return rows as GetAllDriverResponse[];
     }
-    return [];
+    throw new HttpException(404, "NO_DRIVER_FOUND", "Nenhum motorista encontrado");
   }
 }
 export default DriverRepository;
