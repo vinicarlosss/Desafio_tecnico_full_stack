@@ -5,7 +5,7 @@ export class GetRidesValidator{
 
 
     public validate(customer_id: string, driver: Driver|null, withDriverId: boolean){
-        if(!customer_id){
+        if(!customer_id || customer_id === 'undefined'){
             throw new HttpException(400, "INVALID_DATA", "O id do usuário não pode estar em branco");
         }
         if(!driver && withDriverId){

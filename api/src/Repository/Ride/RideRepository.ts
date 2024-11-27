@@ -66,6 +66,7 @@ class RideRepository {
         r.destination,
         r.duration,
         r.value,
+        r.distance,
         d.id AS driver_id,
         d.name AS driver_name
       FROM 
@@ -85,6 +86,7 @@ class RideRepository {
         origin: row.origin,
         destination: row.destination,
         duration: row.duration,
+        distance: row.distance,
         driver: {
           id: row.driver_id,
           name: row.driver_name,
@@ -110,6 +112,7 @@ class RideRepository {
         r.destination,
         r.duration,
         r.value,
+        r,distance,
         d.id AS driver_id,
         d.name AS driver_name
       FROM 
@@ -129,6 +132,7 @@ class RideRepository {
         origin: row.origin,
         destination: row.destination,
         duration: row.duration,
+        distance: row.distance,
         driver: {
           id: row.driver_id,
           name: row.driver_name,

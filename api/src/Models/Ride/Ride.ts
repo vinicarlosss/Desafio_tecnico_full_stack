@@ -3,6 +3,7 @@ export interface Ride{
     date: string;
     origin: string;
     destination: string;
+    distance: number;
     duration: string;
     driver: {
         id: number;
